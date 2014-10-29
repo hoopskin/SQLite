@@ -1,5 +1,6 @@
 package com.hmkcode.android.sqlite;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -122,6 +123,34 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
         // 5. return book
         return contact;
+	}
+	
+	public List<Contact> searchContacts(String fName, String lName, String address, String email, String phone) {
+		String query = "SELECT * FROM " + TABLE_CONTACTS + " WHERE ";
+		boolean needAnd = false;
+		List<String> fields = new LinkedList<String>();
+		fields.add(fName);
+		fields.add(lName);
+		fields.add(address);
+		fields.add(email);
+		fields.add(phone);
+		for (String field : fields) {
+			Log.d("com.hmkcode.android", "qCheck " + field);
+			Log.d("com.hmkcode.android", "qCheck length " + field.length());
+			Log.d("com.hmkcode.android", "qCheck query " + query);
+			if(field.length() == 0) {
+				continue;
+			} else {
+				if(needAnd) {
+					query = query + " AND " + COLUMNS[fields.indexOf(field)] + " LIKE '%" + field + "%'";
+				} else {
+					query = query + COLUMNS[fields.indexOf(field)] + " LIKE '%" + field + "%'";
+					needAnd = true;
+				}
+			}
+		}
+		Log.d("com.hmkcode.android", query);
+		return searchContacts(query);
 	}
 	
 	public List<Contact> searchContacts(String query) {

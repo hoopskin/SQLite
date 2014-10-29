@@ -10,9 +10,9 @@ public class Contact {
 	private String address;
 	private String email;
 	private String phone;
-	
+
 	public Contact(){}
-	
+
 	public Contact(String fName, String lName, String address, String email, String phone) {
 		super();
 		this.fName = fName;
@@ -21,7 +21,7 @@ public class Contact {
 		this.email = email;
 		this.phone = phone;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -70,14 +70,16 @@ public class Contact {
 		this.phone = phone;
 	}
 
-	
+
 	//TODO: Alter this so cleaning up doesn't have to happen in FourthActivity
 	@Override
 	public String toString() {
-		return "Contact [id="+id+", fName="+fName+", lName="+lName+
-			", address="+address+", email="+email+", phone="+phone+"]";
+		return lName + "," + fName +
+				"\n\tAddress:" + address +
+				"\n\temail:"+email +
+				"\n\t" + "Phone:"+phone+"\n";
 	}
-	
-	
-	
+
+
+
 }
